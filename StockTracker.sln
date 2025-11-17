@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.36518.9 d17.14
+# Visual Studio Version 18
+VisualStudioVersion = 18.3.11206.111 d18.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockTracker", "StockTracker\StockTracker.csproj", "{D40F4FF9-43B8-4A9D-B019-AA8345EFC9F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraderUI", "TraderUI\TraderUI.csproj", "{837C1DA4-98D3-4DEB-A092-89090637A6C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{D40F4FF9-43B8-4A9D-B019-AA8345EFC9F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D40F4FF9-43B8-4A9D-B019-AA8345EFC9F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D40F4FF9-43B8-4A9D-B019-AA8345EFC9F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{837C1DA4-98D3-4DEB-A092-89090637A6C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{837C1DA4-98D3-4DEB-A092-89090637A6C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{837C1DA4-98D3-4DEB-A092-89090637A6C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{837C1DA4-98D3-4DEB-A092-89090637A6C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

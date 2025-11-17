@@ -1,0 +1,77 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:TraderUI.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="600"
+        x:Class="TraderUI.MainWindow"
+        x:Name="Root"
+        x:DataType="vm:MainWindowViewModel"
+        Title="TraderUI">
+  <Grid RowDefinitions="Auto, *" ColumnDefinitions="250, *" Margin="8">
+    <!-- Top toolbar -->
+    <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,8">
+      <Button Content="Refresh" Command="{Binding RefreshCommand}" Margin="2"/>
+      <Button Content="Settings" Command="{Binding OpenSettingsCommand}" Margin="2"/>
+      <TextBlock Text="{Binding Status}" Margin="12,6,0,0" VerticalAlignment="Center" />
+    </StackPanel>
+
+    <!-- Left - tracked symbols -->
+    <Border Grid.Row="1" Grid.Column="0" Padding="8" BorderBrush="#DDD" BorderThickness="1" CornerRadius="4">
+      <StackPanel>
+        <TextBlock Text="Tracked Symbols" FontWeight="Bold" FontSize="14"/>
+        <StackPanel Orientation="Horizontal" Margin="0,8,0,8">
+          <TextBox Width="140" Watermark="Symbol" Text="{Binding NewSymbol, UpdateSourceTrigger=PropertyChanged}" />
+          <Button Content="Add" Command="{Binding AddSymbolCommand}" Margin="6,0,0,0"/>
+        </StackPanel>
+
+        <ListBox ItemsSource="{Binding Symbols}" SelectedItem="{Binding SelectedSymbol}">
+          <ListBox.ItemTemplate>
+            <DataTemplate DataType="x:String">
+              <DockPanel LastChildFill="True" Margin="0,4,0,4">
+                <TextBlock Text="{Binding}" VerticalAlignment="Center" DockPanel.Dock="Left" />
+                <Button Content="Remove"
+                        Command="{Binding DataContext.RemoveSymbolCommand, ElementName=Root}"
+                        CommandParameter="{Binding}"
+                        Width="60"
+                        HorizontalAlignment="Right"/>
+              </DockPanel>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+      </StackPanel>
+    </Border>
+
+    <!-- Right - details and time series -->
+    <Border Grid.Row="1" Grid.Column="1" Padding="8" BorderBrush="#DDD" BorderThickness="1" CornerRadius="4" Margin="8,0,0,0">
+      <Grid RowDefinitions="Auto,Auto,*,Auto" >
+        <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Center" Spacing="12">
+          <TextBlock Text="{Binding SelectedSymbol, StringFormat='Symbol: {0}'}" FontSize="18" FontWeight="Bold"/>
+          <TextBlock Text="{Binding CurrentPrice, StringFormat='Current: ${0:F2}'}" FontSize="16" VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,8,0,8">
+          <Button Content="Fetch History" Command="{Binding RefreshCommand}" />
+          <Button Content="Open Details" Command="{Binding OpenSymbolDetailsCommand}" Margin="8,0,0,0"/>
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="2">
+          <ItemsControl ItemsSource="{Binding TimeSeries}">
+            <ItemsControl.ItemTemplate>
+              <DataTemplate DataType="vm:StockDataPoint">
+                <Grid ColumnDefinitions="180,*,100" Margin="0,4,0,4">
+                  <TextBlock Text="{Binding Time}" Grid.Column="0"/>
+                  <TextBlock Text="{Binding Close, StringFormat='${0:F2}'}" Grid.Column="2" HorizontalAlignment="Right"/>
+                </Grid>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </ScrollViewer>
+
+        <Border Grid.Row="3" BorderBrush="#EEE" BorderThickness="1" Padding="6" Margin="0,8,0,0" CornerRadius="3">
+          <TextBlock Text="{Binding FooterText}" FontStyle="Italic" />
+        </Border>
+      </Grid>
+    </Border>
+  </Grid>
+</Window>
