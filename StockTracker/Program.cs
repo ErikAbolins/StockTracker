@@ -19,20 +19,21 @@ namespace ConsoleTests
         { 
             string QUERY_URL = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=67YXPOPGNIPYTMNW";
             Uri queryUri = new Uri(QUERY_URL);
-            using var Aclient = new AlphaVantageClient("67YXPOPGNIPYTMNW");
-            using var stocksClient = Aclient.Stocks();
+            using var client = new AlphaVantageClient("67YXPOPGNIPYTMNW");
+            using var stocksClient = client.Stocks();
 
 
-            using (WebClient client = new WebClient())
-            {
-                dynamic json_data = JsonSerializer.Deserialize<Dictionary<string, dynamic>>(client.DownloadString(queryUri));
-            }
 
-
-            StockTimeSeries stockTs = await stocksClient.GetTimeSeriesAsync("AAPL", Interval.Min1, OutputSize.Compact, isAdjusted: true);
-            GlobalQuote globalQuote = await stocksClient.GetGlobalQuoteAsync("AAPL");
+            var stockTs = await stocksClient.GetTimeSeriesAsync("AAPL", Interval.Min1, OutputSize.Compact, isAdjusted: true);
+            var quote = await stocksClient.GetGlobalQuoteAsync("AAPL");
             ICollection<SymbolSearchMatch> searchMatches = await stocksClient.SearchSymbolAsync("BA");
 
+
+            Console.WriteLine($"AAPL CURRENT: ${quote.Price}");
+            foreach (var dataPoint in stockTs.DataPoints)
+            {
+                Console.WriteLine($"{dataPoint.Time}: ${dataPoint.ClosingPrice}");
+            }
         }
     }
 }
