@@ -123,9 +123,8 @@ Contributions, issues, and feature requests are welcome! Feel free to check the 
 
 ## 📧 Contact
 
-Your Name - [@yourtwitter](https://twitter.com/yourtwitter)
-
-Project Link: [https://github.com/yourusername/StockTracker](https://github.com/yourusername/StockTracker)
+Email: erikabolins@proton.me 
+(Yes i use proton. I like my security)
 
 ---
 
