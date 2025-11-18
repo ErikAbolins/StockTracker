@@ -19,7 +19,7 @@ namespace ConsoleTests
         { 
             string QUERY_URL = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=(Yourapikey)";
             Uri queryUri = new Uri(QUERY_URL);
-            using var client = new AlphaVantageClient("67YXPOPGNIPYTMNW");
+            using var client = new AlphaVantageClient("apikey");
             using var stocksClient = client.Stocks();
 
 
