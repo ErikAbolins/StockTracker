@@ -1985,23 +1985,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\erika\\.nuget\\packages\\": {},
+    "C:\\Users\\ABO24002278\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\erika\\Documents\\StockTracker\\TraderUI\\TraderUI.csproj",
+      "projectUniqueName": "C:\\Users\\ABO24002278\\Documents\\StockTracker\\StockTracker\\TraderUI\\TraderUI.csproj",
       "projectName": "TraderUI",
-      "projectPath": "C:\\Users\\erika\\Documents\\StockTracker\\TraderUI\\TraderUI.csproj",
-      "packagesPath": "C:\\Users\\erika\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\erika\\Documents\\StockTracker\\TraderUI\\obj\\",
+      "projectPath": "C:\\Users\\ABO24002278\\Documents\\StockTracker\\StockTracker\\TraderUI\\TraderUI.csproj",
+      "packagesPath": "C:\\Users\\ABO24002278\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ABO24002278\\Documents\\StockTracker\\StockTracker\\TraderUI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\erika\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ABO24002278\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -2028,7 +2028,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "10.0.100"
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0": {
@@ -2075,7 +2075,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

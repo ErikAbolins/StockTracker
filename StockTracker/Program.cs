@@ -17,7 +17,7 @@ namespace ConsoleTests
     {
         public static async Task Main(string[] args)
         { 
-            string QUERY_URL = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=67YXPOPGNIPYTMNW";
+            string QUERY_URL = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=(Yourapikey)";
             Uri queryUri = new Uri(QUERY_URL);
             using var client = new AlphaVantageClient("67YXPOPGNIPYTMNW");
             using var stocksClient = client.Stocks();
