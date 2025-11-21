@@ -11,7 +11,7 @@ namespace TraderUI
             InitializeComponent();
 
             // Prefer setting ALPHAVANTAGE_API_KEY in environment or replace with your key here.
-            var apiKey = Environment.GetEnvironmentVariable("ALPHAVANTAGE_API_KEY");
+            var apiKey = Environment.GetEnvironmentVariable("YourApiKey");
             DataContext = new MainWindowViewModel(apiKey);
         }
     }

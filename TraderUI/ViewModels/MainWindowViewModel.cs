@@ -20,7 +20,7 @@ namespace TraderUI.ViewModels
 
     public class MainWindowViewModel : INotifyPropertyChanged
     {
-        private readonly string? _apiKey;
+        private const string? _apiKey = "YourApikey";
 
         public ObservableCollection<string> Symbols { get; } = new();
         public ObservableCollection<StockDataPoint> TimeSeries { get; } = new();
@@ -74,10 +74,9 @@ namespace TraderUI.ViewModels
         public ICommand OpenSettingsCommand { get; }
         public ICommand OpenSymbolDetailsCommand { get; }
 
-        // Optional apiKey allows live requests; omit for offline/sample mode.
         public MainWindowViewModel(string? apiKey = null)
         {
-            _apiKey = string.IsNullOrWhiteSpace(apiKey) ? null : apiKey.Trim();
+            //_apiKey = string.IsNullOrWhiteSpace(apiKey) ? null : apiKey.Trim();
 
             // Sample/demo data
             Symbols.Add("AAPL");
@@ -147,19 +146,21 @@ namespace TraderUI.ViewModels
                 using var client = new AlphaVantageClient(_apiKey);
                 using var stocks = client.Stocks();
 
+                // Fetch the latest stock data only once
                 var quote = await stocks.GetGlobalQuoteAsync(symbol);
                 if (quote != null)
                 {
                     CurrentPrice = quote.Price;
                 }
 
+                // Fetch the time series data only once
                 var ts = await stocks.GetTimeSeriesAsync(symbol, Interval.Min5, OutputSize.Compact, isAdjusted: true);
                 TimeSeries.Clear();
                 if (ts?.DataPoints != null)
                 {
                     foreach (var dp in ts.DataPoints
-                                         .OrderByDescending(d => d.Time)
-                                         .Take(30))
+                                     .OrderByDescending(d => d.Time)
+                                     .Take(30))
                     {
                         TimeSeries.Add(new StockDataPoint
                         {
@@ -174,7 +175,7 @@ namespace TraderUI.ViewModels
             }
             catch (Exception ex)
             {
-                Status = "Error: " + ex.Message;
+                Status = $"Error loading {symbol}: {ex.Message}";
             }
         }
 

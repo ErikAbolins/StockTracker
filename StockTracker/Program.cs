@@ -17,9 +17,9 @@ namespace ConsoleTests
     {
         public static async Task Main(string[] args)
         { 
-            string QUERY_URL = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=(Yourapikey)";
+            string QUERY_URL = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=(Your API KEY)";
             Uri queryUri = new Uri(QUERY_URL);
-            using var client = new AlphaVantageClient("apikey");
+            using var client = new AlphaVantageClient("Your API Key");
             using var stocksClient = client.Stocks();
 
 
@@ -34,6 +34,21 @@ namespace ConsoleTests
             {
                 Console.WriteLine($"{dataPoint.Time}: ${dataPoint.ClosingPrice}");
             }
+        }
+
+
+        public static async Task StocksMain()
+        {
+            string apiKey = "Your API Key";
+            using var client = new AlphaVantageClient(apiKey);
+            using var stocksClient = client.Stocks();
+
+            StockTimeSeries stockTs = await stocksClient.GetTimeSeriesAsync("AMEX", Interval.Min1, OutputSize.Compact, isAdjusted: true);
+
+
+            GlobalQuote globalQuote = await stocksClient.GetGlobalQuoteAsync("AMEX");
+
+            ICollection<SymbolSearchMatch> searchMatches = await stocksClient.SearchSymbolAsync("BA");
         }
     }
 }
