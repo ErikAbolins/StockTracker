@@ -1,55 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
-using System.Runtime.CompilerServices;
-using System.Text.Json;
-using System.Threading.Tasks;
-using AlphaVantage.Net.Common.Intervals;
-using AlphaVantage.Net.Common.Size;
-using AlphaVantage.Net.Core.Client;
-using AlphaVantage.Net.Stocks;
-using AlphaVantage.Net.Stocks.Client;
+using System;
+using System.IO;
+using System.Runtime.InteropServices;
 
-namespace ConsoleTests
+namespace StockTracker
 {
-    internal class Program
+    class Program
     {
-        public static async Task Main(string[] args)
-        { 
-            string QUERY_URL = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=(Your API KEY)";
-            Uri queryUri = new Uri(QUERY_URL);
-            using var client = new AlphaVantageClient("Your API Key");
-            using var stocksClient = client.Stocks();
-
-
-
-            var stockTs = await stocksClient.GetTimeSeriesAsync("AAPL", Interval.Min1, OutputSize.Compact, isAdjusted: true);
-            var quote = await stocksClient.GetGlobalQuoteAsync("AAPL");
-            ICollection<SymbolSearchMatch> searchMatches = await stocksClient.SearchSymbolAsync("BA");
-
-
-            Console.WriteLine($"AAPL CURRENT: ${quote.Price}");
-            foreach (var dataPoint in stockTs.DataPoints)
-            {
-                Console.WriteLine($"{dataPoint.Time}: ${dataPoint.ClosingPrice}");
-            }
-        }
-
-
-        public static async Task StocksMain()
+        static void Main(string[] args)
         {
-            string apiKey = "Your API Key";
-            using var client = new AlphaVantageClient(apiKey);
-            using var stocksClient = client.Stocks();
-
-            StockTimeSeries stockTs = await stocksClient.GetTimeSeriesAsync("AMEX", Interval.Min1, OutputSize.Compact, isAdjusted: true);
-
-
-            GlobalQuote globalQuote = await stocksClient.GetGlobalQuoteAsync("AMEX");
-
-            ICollection<SymbolSearchMatch> searchMatches = await stocksClient.SearchSymbolAsync("BA");
+            string apiKey = Environment.GetEnvironmentVariable("API_KEY");
+            if (string.IsNullOrEmpty(apiKey))
+            {
+                throw new InvalidOperationException("Missing API key. Please set the API_KEY environment variable.");
+            }
+            // Rest of your program logic goes here, utilizing apiKey where needed.
         }
     }
 }
-
